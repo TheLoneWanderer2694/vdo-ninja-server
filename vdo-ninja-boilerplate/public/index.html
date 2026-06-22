@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VDO.Ninja - P2P Video Streaming</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Peer-to-Peer Video Stream</h1>
+      <div class="connection-info">
+        <div class="info-item">
+          <label>Room ID:</label>
+          <span id="roomIdDisplay">--</span>
+        </div>
+        <div class="info-item">
+          <label>Status:</label>
+          <span id="connectionStatus">Disconnected</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="video-container">
+        <div class="video-wrapper local">
+          <video id="localVideo" autoplay playsinline muted></video>
+          <div class="video-label">Local (You)</div>
+        </div>
+        <div class="video-wrapper remote">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <div class="video-label">Remote</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <button id="startButton" class="btn btn-primary">Start Stream (Host)</button>
+          <button id="joinButton" class="btn btn-secondary">Join Stream (Guest)</button>
+          <button id="leaveButton" class="btn btn-danger" style="display:none;">Leave</button>
+        </div>
+
+        <div class="control-group" id="joinForm" style="display:none;">
+          <input type="text" id="roomIdInput" placeholder="Enter Room ID (e.g., ABC123)" maxlength="6" />
+          <button id="connectButton" class="btn btn-primary">Connect</button>
+        </div>
+
+        <div class="media-controls" id="mediaControls" style="display:none;">
+          <button id="muteAudio" class="btn btn-icon">Mute Audio</button>
+          <button id="muteVideo" class="btn btn-icon">Mute Video</button>
+        </div>
+      </div>
+
+      <div class="settings" id="settingsPanel" style="display:none;">
+        <h3>Settings</h3>
+        <div class="setting">
+          <label>Video Resolution:</label>
+          <select id="resolutionSelect">
+            <option value="hd1080">1080p (HD)</option>
+            <option value="hd720" selected>720p (HD)</option>
+            <option value="vga">480p (VGA)</option>
+            <option value="qvga">240p (QVGA)</option>
+          </select>
+        </div>
+        <div class="setting">
+          <label>Frame Rate:</label>
+          <select id="framerateSelect">
+            <option value="30" selected>30 fps</option>
+            <option value="60">60 fps</option>
+            <option value="15">15 fps</option>
+          </select>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="peer-connection.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
